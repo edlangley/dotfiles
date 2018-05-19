@@ -1,0 +1,181 @@
+call plug#begin('~/.vim/plugged')
+
+"Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+
+Plug 'bronson/vim-trailing-whitespace'
+
+call plug#end()
+
+
+" -- Ed's Vim settings:
+
+colorscheme koehler
+set hls
+
+
+" -- NerdTree, show automatically if vim launched without file arg
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" -- Have NerdTree find the current file whenever switching focus
+"    to a writeable buffer:
+"
+" Returns true if is NERDTree open/active
+function! IsNTOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+" Call NERDTreeFind if:
+"  NERDTree is active,
+"  Current window contains a modifiable file,
+"  We're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNTOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+autocmd BufEnter * call SyncTree()
+
+
+" -- C indenting settings (From vim manual 30.5)
+function! UseIndent4Spaces()
+    " Just spaces in a file for indenting:
+    set expandtab
+    " Indent 4 spaces when tab pressed:
+    set tabstop=4
+    " Auto indent 4 spaces:
+    set cindent shiftwidth=4
+endfunc
+
+function! UseIndentTabsShowWidth4()
+    " Just spaces in a file for indenting:
+    set noexpandtab
+    " Indent 4 spaces when tab pressed:
+    set tabstop=4
+    " Auto indent 4 spaces:
+    set cindent shiftwidth=4
+endfunc
+
+autocmd VimEnter * call UseIndent4Spaces()
+
+
+" -- Add full delete commands
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+
+" -- Line numbering, with relative/normal toggling
+set number
+set norelativenumber
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <leader>tn :call NumberToggle()<cr>
+
+
+" -- Highlight column 80
+if (exists('+colorcolumn'))
+	set colorcolumn=80
+	highlight ColorColumn ctermbg=9
+endif
+
+
+" -- White space character display toggled in current buffer when F3 pressed
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+let g:WSMarked = 0
+function! ToggleWhiteSpaceMarked()
+	if g:WSMarked
+		set nolist
+	else
+		set list
+	endif
+	let g:WSMarked = !g:WSMarked
+endfunction
+nmap <silent> <F3> <Esc>:call ToggleWhiteSpaceMarked()<CR>
+
+
+" -- Tags and CScope data loading
+function! LoadTagsCScopeDatabases()
+    echohl StatusLine | echo "Loading tags and CScope databases" | echohl None
+
+    execute ":cs reset"
+
+    let db_dir=$HOME."/not_backed_up/tags_cscope_databases/*/"
+
+    let cscopefiles = findfile("cscope.out", db_dir, -1)
+    for cscopefile in cscopefiles
+        echo "Loading cscope DB from:  ".cscopefile
+        execute ":cs add ".cscopefile
+
+        let tagdir = substitute(cscopefile, "cscope.out", "", "")
+        echo "Loading tags from:       ".tagdir."tags"
+        execute ":set tags+=".tagdir."tags"
+    endfor
+endfunction
+
+function! UpdateTagsCScopeDatabases()
+    echohl StatusLine | echo "Updating tags and CScope databases" | echohl None
+    let tags_update_output = system("tags_update.sh")
+    echo tags_update_output
+
+    call LoadTagsCScopeDatabases()
+endfunction
+
+nmap <leader>lt :call LoadTagsCScopeDatabases()<cr>
+imap <leader>lt <ESC>l:call LoadTagsCScopeDatabases()<cr>i
+
+nmap <leader>ut :call UpdateTagsCScopeDatabases()<cr>
+imap <leader>ut <ESC>l:call UpdateTagsCScopeDatabases()<cr>i
+
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | call LoadTagsCScopeDatabases() | endif
+
+" -- CScope lookup command mappings
+if has("cscope")
+
+	" Using 'CTRL-\' then a search type makes the vim window
+	" "shell-out", with search results displayed on the bottom
+
+	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+	" Using 'CTRL-spacebar' then a search type makes the vim window
+	" split horizontally, with search result displayed in
+	" the new window.
+
+	nmap <C-[>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-[>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-[>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+	" Hitting CTRL-space *twice* before the search type does a vertical
+	" split instead of a horizontal one
+
+	nmap <C-[><C-[>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[><C-[>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[><C-[>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[><C-[>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[><C-[>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-[><C-[>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-[><C-[>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+
+
+
+
