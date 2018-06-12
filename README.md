@@ -10,7 +10,7 @@ That is described down below.
 # Installation
 
 ```
-git clone https://github.com/bswinnerton/dotfiles ~/.dotfiles
+git clone https://github.com/edlangley/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install
 ```
