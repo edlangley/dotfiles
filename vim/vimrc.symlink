@@ -67,6 +67,16 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
 
+" -- Move block select command aside from Ctrl+v to <leader>v
+noremap <leader>v <C-v>
+
+" -- Add Ctrl+x/c/v global cut/copy/paste commands
+vnoremap <C-x> "+x
+vnoremap <C-c> "+y
+nnoremap <C-v> "+gP
+imap <C-v> <Esc>"+gPi
+vnoremap <C-v> "+gP
+
 " -- Line numbering, with relative/normal toggling
 set number
 set norelativenumber
