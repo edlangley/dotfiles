@@ -1,0 +1,216 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = cd72f0ad-9cac-4bbf-917c-00251f843422
+      last_active_window = True
+      maximised = False
+      order = 0
+      parent = ""
+      position = 475:156
+      size = 841, 498
+      title = /bin/bash
+      type = Window
+    [[[terminal1]]]
+      order = 0
+      parent = child0
+      profile = default
+      type = Terminal
+      uuid = cd72f0ad-9cac-4bbf-917c-00251f843422
+  [[Embedded_Dev_Layout]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:25
+      size = 1920, 1033
+      title = /bin/bash
+      type = Window
+    [[[child1]]]
+      active_page = 4
+      labels = Serial + SSH, Build + git, find + grep, Other 0, Other 1
+      last_active_term = cd72f0ad-9cac-4bbf-917c-00251f843422, 1aeb5d81-f24f-456c-a5b2-59ac319bc5bc, c1c887aa-4b49-477a-8555-e653a83e15ab, 9ec18399-b6bf-4aac-9d77-14907d8613d7, 5ee352fb-1169-4542-a7ed-b669041a74dd
+      order = 0
+      parent = child0
+      type = Notebook
+    [[[child10]]]
+      order = 0
+      parent = child9
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child13]]]
+      order = 1
+      parent = child9
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child16]]]
+      order = 2
+      parent = child1
+      position = 957
+      ratio = 0.499738903394
+      type = HPaned
+    [[[child17]]]
+      order = 0
+      parent = child16
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 957
+      ratio = 0.499738903394
+      type = HPaned
+    [[[child20]]]
+      order = 1
+      parent = child16
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child23]]]
+      order = 3
+      parent = child1
+      position = 957
+      ratio = 0.499738903394
+      type = HPaned
+    [[[child26]]]
+      order = 4
+      parent = child1
+      position = 957
+      ratio = 0.499738903394
+      type = HPaned
+    [[[child3]]]
+      order = 0
+      parent = child2
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child6]]]
+      order = 1
+      parent = child2
+      position = 501
+      ratio = 0.501
+      type = VPaned
+    [[[child9]]]
+      order = 1
+      parent = child1
+      position = 957
+      ratio = 0.499738903394
+      type = HPaned
+    [[[terminal11]]]
+      order = 0
+      parent = child10
+      profile = default
+      title = Build
+      type = Terminal
+      uuid = 1aeb5d81-f24f-456c-a5b2-59ac319bc5bc
+    [[[terminal12]]]
+      order = 1
+      parent = child10
+      profile = default
+      title = Post build / deploy
+      type = Terminal
+      uuid = f4ad68e4-ba97-4d3c-a3d6-5fa0c1d3359f
+    [[[terminal14]]]
+      order = 0
+      parent = child13
+      profile = default
+      title = git 0
+      type = Terminal
+      uuid = cec06dfb-f63d-499a-b886-6a53188254ed
+    [[[terminal15]]]
+      order = 1
+      parent = child13
+      profile = default
+      title = git 1
+      type = Terminal
+      uuid = 14b7904e-f2a2-49e1-9159-2c84537ce5c3
+    [[[terminal18]]]
+      order = 0
+      parent = child17
+      profile = default
+      title = find / grep 0
+      type = Terminal
+      uuid = c1c887aa-4b49-477a-8555-e653a83e15ab
+    [[[terminal19]]]
+      order = 1
+      parent = child17
+      profile = default
+      type = Terminal
+      uuid = a8934d9f-2746-4ed1-8640-330ce888b07d
+    [[[terminal21]]]
+      order = 0
+      parent = child20
+      profile = default
+      title = find / grep 2
+      type = Terminal
+      uuid = d503b222-66bb-4a43-b4d4-add56fedc280
+    [[[terminal22]]]
+      order = 1
+      parent = child20
+      profile = default
+      title = find / grep 3
+      type = Terminal
+      uuid = ab7580fe-27a8-43ba-9c79-e44085b91678
+    [[[terminal24]]]
+      order = 0
+      parent = child23
+      profile = default
+      type = Terminal
+      uuid = b64e5289-b21b-4dc9-8da9-39c8a096ae9c
+    [[[terminal25]]]
+      order = 1
+      parent = child23
+      profile = default
+      type = Terminal
+      uuid = 9ec18399-b6bf-4aac-9d77-14907d8613d7
+    [[[terminal27]]]
+      order = 0
+      parent = child26
+      profile = default
+      type = Terminal
+      uuid = 6bee7ca8-3f0d-4446-ba7d-2e19aca1fa86
+    [[[terminal28]]]
+      order = 1
+      parent = child26
+      profile = default
+      type = Terminal
+      uuid = 5ee352fb-1169-4542-a7ed-b669041a74dd
+    [[[terminal4]]]
+      order = 0
+      parent = child3
+      profile = default
+      title = Serial 0 to target
+      type = Terminal
+      uuid = cd72f0ad-9cac-4bbf-917c-00251f843422
+    [[[terminal5]]]
+      order = 1
+      parent = child3
+      profile = default
+      title = Serial 1 to target
+      type = Terminal
+      uuid = 8f89924a-3d3f-4a23-886e-91fce8a633f5
+    [[[terminal7]]]
+      order = 0
+      parent = child6
+      profile = default
+      title = ssh 0 to target
+      type = Terminal
+      uuid = 6ae945d4-0eb0-4e68-a84d-1d21f6dae8f5
+    [[[terminal8]]]
+      order = 1
+      parent = child6
+      profile = default
+      title = ssh 1 to target
+      type = Terminal
+      uuid = b6b7e639-fb76-463e-8593-5f6185377839
+[plugins]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
