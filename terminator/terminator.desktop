@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Terminator
+Comment=Multiple terminals in one window
+Icon=terminator
+TryExec=terminator
+Exec=terminator -s
+NoDisplay=false
+Categories=GNOME;GTK;System;TerminalEmulator;Utility;
+Keywords=terminal;shell;prompt;command;commandline;
+StartupNotify=true
+Terminal=false
+
+Actions=NewWindow;
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Exec=terminator
+OnlyShowIn=Unity
