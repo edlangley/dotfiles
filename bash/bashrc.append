@@ -1,0 +1,9 @@
+
+for file in $(find ~/.dotfiles/ -name *path.bash); do
+    . $file
+done
+
+for file in $(find ~/.dotfiles/ -name *.bash -not -name *path.bash); do
+    . $file
+done
+
